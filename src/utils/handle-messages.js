@@ -9,7 +9,10 @@ export const printError = (context, error, redirect) => {
  `
 }
 
-export const printSuccess = (message) => {
-  const resultDisplay = document.getElementById('result-display')
-  resultDisplay.innerHTML = `<div class="success">${message}</div>`
+export const printSuccess = (message, redirect) => {
+  const resultDisplay = document.getElementById('status-display')
+  resultDisplay.innerHTML = `
+    <div class="success">${message}</div>
+    <a class="back" href="${redirect}">Volver</a>
+  `
 }

@@ -16,7 +16,7 @@ export const processDocument = async (deviceData, document) => {
   try {
     const response = await axios.post(`${VITE_URL}/api/process_document`, { deviceData, document, uid, campaign })
     if (response.ok) {
-      printSuccess(response.message)
+      printSuccess(response.message, microsite.url)
     }
   } catch (err) {
     printError('Error de la factura', err.response.data.message || err.message, microsite.url)
