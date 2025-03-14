@@ -1,10 +1,11 @@
-export const printError = (context, error) => {
+export const printError = (context, error, redirect) => {
   const statusDisplay = document.getElementById('status-display')
 
   statusDisplay.innerHTML = `
-   <div class="error">
-     ${context}: ${error}
-   </div>
+    <div class="error">
+      ${context}: ${error}
+    </div>
+    <a class="back" href="${redirect}">Volver</a>
  `
 }
 

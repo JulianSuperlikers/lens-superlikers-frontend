@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { printError, printSuccess } from './handle-messages'
+import { MICROSITES } from './config'
 
 const { VITE_URL } = import.meta.env
 
@@ -10,12 +11,14 @@ export const processDocument = async (deviceData, document) => {
 
   if (!campaign || !uid) return
 
+  const microsite = MICROSITES[campaign]
+
   try {
     const response = await axios.post(`${VITE_URL}/api/process_document`, { deviceData, document, uid, campaign })
     if (response.ok) {
       printSuccess(response.message)
     }
   } catch (err) {
-    printError('Error de la factura', err.response.data.message || err.message)
+    printError('Error de la factura', err.response.data.message || err.message, microsite.url)
   }
 }

@@ -43,3 +43,10 @@ body {
 .success {
   color: var(--success-color)
 }
+
+.status-display {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 1rem;
+}

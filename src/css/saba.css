@@ -18,7 +18,7 @@ header img {
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 4px;
-  background-color: #EC6AA4;
+  background-color: #fff;
 }
 
 .result-display {
@@ -28,7 +28,7 @@ header img {
   background-color: #EC6AA4;
 }
 
-.scan-btn {
+.scan-btn, a.back {
   transition: background-color 0.3s ease;
   cursor: pointer;
   color: white;
@@ -36,6 +36,7 @@ header img {
   border: none;
   border-radius: 28px;
   font-size: 1rem;
+  text-decoration: none;
 }
 
 .scan-btn.scan {
@@ -52,4 +53,8 @@ header img {
 
 .scan-btn.upload:hover {
   background: rgb(236, 106, 164, 0.8);
+}
+
+a.back {
+  background: #EC6AA4;
 }

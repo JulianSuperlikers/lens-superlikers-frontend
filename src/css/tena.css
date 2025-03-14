@@ -35,3 +35,15 @@ header img {
 .scan-btn.scan:hover {
   background: rgba(2, 37, 118, 0.8);
 }
+
+a.back {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 28px;
+  font-size: 1rem;
+  text-decoration: none;
+  background: #022576;
+}
