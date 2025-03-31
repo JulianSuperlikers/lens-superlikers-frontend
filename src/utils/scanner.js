@@ -21,7 +21,11 @@ export class ScannerApp {
         blurModal: true,
         isDocumentModal: true,
         exitButton: true,
-        enableSubmit: false,
+        enableSubmit: true,
+        customSubmitHandler: async (image) => {
+          const deviceData = await VeryfiLens.getDeviceData()
+          await this.submitDocument(deviceData, image)
+        },
         debug_mode: false,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
@@ -34,12 +38,7 @@ export class ScannerApp {
 
       this.updateStatus('Scanner initialized')
 
-      await VeryfiLens.showCamera((item) => {
-        if (item.image) {
-          setTimeout(() => this.createSubmitButton(), 0)
-          this.captureDocument = item.image
-        }
-      })
+      await VeryfiLens.showCamera()
     } catch (error) {
       this.handleError('Initialization failed', error)
     }
@@ -73,24 +72,6 @@ export class ScannerApp {
         const scanType = button.dataset.type
         this.initializeScanner(scanType)
       })
-    })
-  }
-
-  createSubmitButton () {
-    const originalButton = document.querySelector('#veryfi-submit-button')
-    const overlay = document.querySelector('#veryfi-video-overlay')
-
-    const submitButton = originalButton.cloneNode()
-    submitButton.style.display = 'block'
-    submitButton.textContent = 'Submit'
-
-    overlay.appendChild(submitButton)
-
-    submitButton.addEventListener('click', async () => {
-      const deviceData = await VeryfiLens.getDeviceData()
-      const document = this.captureDocument
-
-      await this.submitDocument(deviceData, document)
     })
   }
 
