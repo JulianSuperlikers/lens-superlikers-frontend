@@ -31,7 +31,10 @@ export class ScannerApp {
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
         blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',
         retakeButtonText: 'Reintentar',
-        submitButtonText: 'Enviar de todas formas'
+        submitButtonText: 'Enviar',
+        cropButtonText: 'Recortar',
+        resetButtonText: 'Reiniciar',
+        dropZoneText: 'Haz clic o arrastra y suelta para subir una imagen'
       })
 
       this.setupEventHandlers()
