@@ -8,7 +8,7 @@ export const MICROSITES = {
     id: 'tena',
     clientId: VITE_VERYFI_CLIENT_ID_TENA,
     url: 'https://www.circulotena.com.mx/',
-    autoStart: false,
+    autoStart: true,
     defaultType: 'document'
   },
   ua: {
