@@ -2,25 +2,50 @@ import './css/styles.css'
 import { MICROSITES } from './utils/config'
 import { loadMicrositeContent } from './utils/dom-loader'
 import { ScannerApp } from './utils/scanner'
+import { printError } from './utils/handle-messages'
 
 const init = async () => {
-  const params = new URLSearchParams(window.location.search)
-  const campaign = params.get('campaign')
-  const uid = params.get('uid')
+  try {
+    const params = new URLSearchParams(window.location.search)
+    const campaign = params.get('campaign')
+    const uid = params.get('uid')
 
-  const microsite = MICROSITES[campaign]
-  console.log({ microsite, campaign, uid })
-  await loadMicrositeContent(microsite)
+    // Check if campaign is valid and exists in MICROSITES
+    if (!campaign || !MICROSITES[campaign]) {
+      console.error(`Campaign not found: ${campaign}`)
+      // Redirect to default page if no valid campaign
+      // window.location = 'https://www.superlikers.com/'
+      return
+    }
 
-  if (!campaign || !uid) {
-    window.location = microsite.url
-    return
-  }
+    const microsite = MICROSITES[campaign]
+    console.log(`Loading microsite for campaign: ${campaign}`, microsite)
 
-  const scannerApp = new ScannerApp(microsite.clientId)
+    // Load microsite content
+    try {
+      await loadMicrositeContent(microsite)
+    } catch (error) {
+      printError('Failed to load microsite content', error)
+      return
+    }
 
-  if (microsite.autoStart && microsite.defaultType) {
-    await scannerApp.initializeScanner(microsite.defaultType)
+    // Check if required parameters exist
+    if (!uid) {
+      console.warn('Missing uid parameter, redirecting to microsite URL')
+      window.location = microsite.url
+      return
+    }
+
+    // Initialize scanner
+    const scannerApp = new ScannerApp(microsite.clientId)
+
+    // Only attempt to auto-start if both required properties exist
+    if (microsite.autoStart && microsite.defaultType) {
+      console.log(`Auto-starting scanner with type: ${microsite.defaultType}`)
+      await scannerApp.initializeScanner(microsite.defaultType)
+    }
+  } catch (error) {
+    printError('Initialization error', error)
   }
 }
 
