@@ -9,7 +9,7 @@ const init = async () => {
   const uid = params.get('uid')
 
   const microsite = MICROSITES[campaign]
-  console.log({ microsite })
+  console.log({ microsite, campaign, uid })
   await loadMicrositeContent(microsite)
 
   if (!campaign || !uid) {
