@@ -37,28 +37,10 @@ export class ScannerApp {
         dropZoneText: 'Haz clic o arrastra y suelta para subir una imagen'
       })
 
-      this.setupEventHandlers()
-
-      this.updateStatus('Scanner initialized')
-
       await VeryfiLens.showCamera()
     } catch (error) {
       this.handleError('Initialization failed', error)
     }
-  }
-
-  setupEventHandlers () {
-    VeryfiLens.onSuccess((result) => {
-      this.updateStatus('Scan completed')
-    })
-
-    VeryfiLens.onFailure((error) => {
-      this.handleError('Scan failed', error)
-    })
-
-    VeryfiLens.onUpdate((status) => {
-      this.updateStatus(`Status: ${status.status}`)
-    })
   }
 
   updateStatus (message) {
