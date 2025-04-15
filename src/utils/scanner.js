@@ -26,7 +26,7 @@ export class ScannerApp {
           const deviceData = await VeryfiLens.getDeviceData()
           await this.submitDocument(deviceData, image)
         },
-        debug_mode: true,
+        debug_mode: false,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
         blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',

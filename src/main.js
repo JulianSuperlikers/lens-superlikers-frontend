@@ -13,15 +13,13 @@ const init = async () => {
     // Check if campaign is valid and exists in MICROSITES
     if (!campaign || !MICROSITES[campaign]) {
       console.error(`Campaign not found: ${campaign}`)
-      // Redirect to default page if no valid campaign
-      // window.location = 'https://www.superlikers.com/'
       return
     }
 
     const microsite = MICROSITES[campaign]
     console.log(`Loading microsite for campaign: ${campaign}`, microsite)
 
-    // Load microsite content
+    // Load microsite content (html and css)
     try {
       await loadMicrositeContent(microsite)
     } catch (error) {
@@ -42,7 +40,10 @@ const init = async () => {
     // Only attempt to auto-start if both required properties exist
     if (microsite.autoStart && microsite.defaultType) {
       console.log(`Auto-starting scanner with type: ${microsite.defaultType}`)
-      await scannerApp.initializeScanner(microsite.defaultType)
+
+      setTimeout(async () => {
+        await scannerApp.initializeScanner(microsite.defaultType)
+      }, 0)
     }
   } catch (error) {
     printError('Initialization error', error)
