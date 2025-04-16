@@ -17,7 +17,6 @@ const init = async () => {
     }
 
     const microsite = MICROSITES[campaign]
-    console.log(`Loading microsite for campaign: ${campaign}`, microsite)
 
     // Load microsite content (html and css)
     try {
@@ -42,8 +41,8 @@ const init = async () => {
       console.log(`Auto-starting scanner with type: ${microsite.defaultType}`)
 
       setTimeout(async () => {
-        await scannerApp.initializeScanner(microsite.defaultType)
-      }, 0)
+        await scannerApp.initializeScanner(microsite.defaultType || 'document')
+      }, 100)
     }
   } catch (error) {
     printError('Initialization error', error)
