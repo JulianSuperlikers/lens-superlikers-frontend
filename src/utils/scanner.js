@@ -15,6 +15,13 @@ export class ScannerApp {
 
   async initializeScanner (flavor) {
     try {
+      // Add a spinner to indicate loading
+      const spinner = createSpinner(document.body, 'Iniciando cámara...')
+      spinner.show()
+
+      // Add a delay to ensure DOM is fully ready before initializing
+      await new Promise(resolve => setTimeout(resolve, 200))
+
       await VeryfiLens.init(this.clientId, {
         lensFlavor: flavor,
         torchButton: true,
@@ -37,7 +44,13 @@ export class ScannerApp {
         dropZoneText: 'Haz clic o arrastra y suelta para subir una imagen'
       })
 
+      // Add another short delay before showing camera
+      await new Promise(resolve => setTimeout(resolve, 500))
+
       await VeryfiLens.showCamera()
+
+      // Hide spinner after camera is shown
+      spinner.hide()
     } catch (error) {
       this.handleError('Initialization failed', error)
     }
