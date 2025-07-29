@@ -13,7 +13,7 @@ export class ScannerApp {
     this.initializeEventListeners()
   }
 
-  async initializeScanner (flavor) {
+  async initializeScanner (flavor, debugMode = false) {
     try {
       // Add a spinner to indicate loading
       const spinner = createSpinner(document.body, 'Iniciando cámara...')
@@ -33,7 +33,7 @@ export class ScannerApp {
           const deviceData = await VeryfiLens.getDeviceData()
           await this.submitDocument(deviceData, image)
         },
-        debug_mode: true,
+        debug_mode: debugMode,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
         blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',

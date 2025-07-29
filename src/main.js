@@ -1,8 +1,11 @@
 import './css/styles.css'
+
 import { MICROSITES } from './utils/config'
 import { loadMicrositeContent } from './utils/dom-loader'
 import { ScannerApp } from './utils/scanner'
 import { printError } from './utils/handle-messages'
+
+const { VITE_DEBUG_MODE } = import.meta.env
 
 const init = async () => {
   try {
@@ -38,10 +41,9 @@ const init = async () => {
 
     // Only attempt to auto-start if both required properties exist
     if (microsite.autoStart && microsite.defaultType) {
-      console.log(`Auto-starting scanner with type: ${microsite.defaultType}`)
-
       setTimeout(async () => {
-        await scannerApp.initializeScanner(microsite.defaultType || 'document')
+        const debugMode = VITE_DEBUG_MODE === 'true'
+        await scannerApp.initializeScanner(microsite.defaultType || 'document', debugMode)
       }, 100)
     }
   } catch (error) {
