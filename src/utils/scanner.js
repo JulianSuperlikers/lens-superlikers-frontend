@@ -2,18 +2,20 @@ import VeryfiLens from 'veryfi-lens-wasm'
 import { createSpinner } from '../components/spinner'
 import { processDocument } from './process-document'
 import { printError } from './handle-messages'
+import { generateUserUuid } from './uuid'
 
 export class ScannerApp {
-  constructor (clientId) {
+  constructor (clientId, uid) {
     this.statusDisplay = document.getElementById('status-display')
     this.clientId = clientId
+    this.uid = uid
 
     this.captureDocument = null
 
     this.initializeEventListeners()
   }
 
-  async initializeScanner (flavor) {
+  async initializeScanner (flavor, debugMode = false) {
     try {
       // Add a spinner to indicate loading
       const spinner = createSpinner(document.body, 'Iniciando cámara...')
@@ -31,9 +33,13 @@ export class ScannerApp {
         enableSubmit: true,
         customSubmitHandler: async (image) => {
           const deviceData = await VeryfiLens.getDeviceData()
+
+          const userUuid = await generateUserUuid(this.uid)
+          deviceData.user_uuid = userUuid
+
           await this.submitDocument(deviceData, image)
         },
-        debug_mode: false,
+        debug_mode: debugMode,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
         blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',
