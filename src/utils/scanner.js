@@ -2,11 +2,13 @@ import VeryfiLens from 'veryfi-lens-wasm'
 import { createSpinner } from '../components/spinner'
 import { processDocument } from './process-document'
 import { printError } from './handle-messages'
+import { generateUserUuid } from './uuid'
 
 export class ScannerApp {
-  constructor (clientId) {
+  constructor (clientId, uid) {
     this.statusDisplay = document.getElementById('status-display')
     this.clientId = clientId
+    this.uid = uid
 
     this.captureDocument = null
 
@@ -31,6 +33,10 @@ export class ScannerApp {
         enableSubmit: true,
         customSubmitHandler: async (image) => {
           const deviceData = await VeryfiLens.getDeviceData()
+
+          const userUuid = await generateUserUuid(this.uid)
+          deviceData.user_uuid = userUuid
+
           await this.submitDocument(deviceData, image)
         },
         debug_mode: debugMode,

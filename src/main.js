@@ -37,7 +37,7 @@ const init = async () => {
     }
 
     // Initialize scanner
-    const scannerApp = new ScannerApp(microsite.clientId)
+    const scannerApp = new ScannerApp(microsite.clientId, uid)
 
     // Only attempt to auto-start if both required properties exist
     if (microsite.autoStart && microsite.defaultType) {
