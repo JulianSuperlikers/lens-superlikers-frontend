@@ -51,6 +51,12 @@ Para configurar un nuevo programa o microsite, sigue estos pasos:
 
 3. Asegúrate de que el `id` sea único y que el `clientId` corresponda con la variable de entorno definida.
 
+4. Crea los archivos de personalización para el nuevo microsite:
+   - **HTML**: Crea un archivo `src/pages/nombre_programa.html` con la estructura y contenido específico del microsite
+   - **CSS**: Crea un archivo `src/css/nombre_programa.css` con los estilos personalizados (colores, fuentes, imágenes de fondo, etc.)
+   
+   > **Nota**: Puedes tomar como referencia los archivos existentes en `src/pages/` y `src/css/` de programas como `saba`, `tena` o `pernod`.
+
 ## Uso
 
 La aplicación se inicializa mediante parámetros de URL:
