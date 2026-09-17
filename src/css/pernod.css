@@ -1,0 +1,68 @@
+html {
+  background: linear-gradient(0deg, #121283 0%, #3234a4 74%, #383aaa 82%, #3744a0 100%)
+}
+
+body {
+  height: 100dvh;
+  background-image: url('/images/pernod/top-login.png'), url('/images/pernod/bot-login.png');
+  background-position: top left, bottom right;
+  background-size: 54rem;
+  background-repeat: no-repeat;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+header img {
+  max-width: 180px;
+}
+
+.status-display {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.result-display {
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  background-color: #EC6AA4;
+}
+
+.scan-btn, a.back {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 28px;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.scan-btn.scan {
+  background: linear-gradient(0deg, rgba(255, 69, 205, 1) 0%, rgba(255, 151, 145, 1) 100%);
+}
+
+.scan-btn.scan:hover {
+  filter: brightness(1.1);
+}
+
+.scan-btn.upload {
+  background: linear-gradient(0deg, rgba(57, 58, 170, 1) 0%, rgba(89, 91, 203, 1) 100%);
+}
+
+.scan-btn.upload:hover {
+  filter: brightness(1.1);
+}
+
+a.back {
+  background: linear-gradient(0deg, rgba(255, 69, 205, 1) 0%, rgba(255, 151, 145, 1) 100%);
+}

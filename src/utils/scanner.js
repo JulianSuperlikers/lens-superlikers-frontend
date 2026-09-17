@@ -11,7 +11,6 @@ export class ScannerApp {
     this.uid = uid
 
     this.captureDocument = null
-
     this.initializeEventListeners()
   }
 
@@ -31,6 +30,7 @@ export class ScannerApp {
         isDocumentModal: true,
         exitButton: true,
         enableSubmit: true,
+        mirrorButton: false,
         customSubmitHandler: async (image) => {
           const deviceData = await VeryfiLens.getDeviceData()
 
